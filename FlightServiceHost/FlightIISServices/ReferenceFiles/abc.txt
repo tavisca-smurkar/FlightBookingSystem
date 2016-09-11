@@ -1,0 +1,87 @@
+﻿using FlightServiceLibrary;
+using System.Collections.Generic;
+using System;
+using System.ServiceModel;
+using System.Xml;
+
+namespace FlightConsole
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //using (ServiceHost serviceHost = new ServiceHost(typeof(FlightServiceLibrary.FlightService)))
+            //{
+            //    serviceHost.Open();
+            //    Console.WriteLine("service started   " + DateTime.Now);
+            //    Console.Read();
+            //}
+            //List<Flight> flight = new FlightServiceLibrary.FlightService().GetFlightBySnD("Pune", "Mumbai","Economy");
+            //foreach (var a in flight)
+            //{
+            //    Console.WriteLine(a.Id + " " + " " + a.Source+ " " +a.Price);
+            //}
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load("d:/Booking.xml");
+            XmlNode Booking = xDoc.CreateElement("Booking");
+            xDoc.DocumentElement.AppendChild(Booking);
+
+            XmlNode BookingId = xDoc.CreateElement("BookingId");
+            BookingId.InnerText = "1";
+            Booking.AppendChild(BookingId);
+
+            XmlNode CustomerName = xDoc.CreateElement("CustomerName");
+            CustomerName.InnerText = "Manoj";
+            Booking.AppendChild(CustomerName);
+
+            XmlNode EmailId = xDoc.CreateElement("EmailId");
+            EmailId.InnerText = "manoj@sdf.com";
+            Booking.AppendChild(EmailId);
+
+            XmlNode MobileNumber = xDoc.CreateElement("MobileNumber");
+            MobileNumber.InnerText = "9876543210";
+            Booking.AppendChild(MobileNumber);
+
+            XmlNode FlightId = xDoc.CreateElement("FlightId");
+            FlightId.InnerText = "AS-87";
+            Booking.AppendChild(FlightId);
+
+            XmlNode AirlineName = xDoc.CreateElement("AirlineName");
+            AirlineName.InnerText = "kingfisher";
+            Booking.AppendChild(AirlineName);
+
+            XmlNode Source = xDoc.CreateElement("Source");
+            Source.InnerText = "kingfisher";
+            Booking.AppendChild(Source);
+
+            XmlNode Destination = xDoc.CreateElement("Destination");
+            Destination.InnerText = "kingfisher";
+            Booking.AppendChild(Destination);
+
+            XmlNode Class = xDoc.CreateElement("Class");
+            Class.InnerText = "kingfisher";
+            Booking.AppendChild(Class);
+
+            XmlNode Price = xDoc.CreateElement("Price");
+            Price.InnerText = "kingfisher";
+            Booking.AppendChild(AirlineName);
+
+            XmlNode DepartureTime = xDoc.CreateElement("DepartureTime");
+            DepartureTime.InnerText = "kingfisher";
+            Booking.AppendChild(DepartureTime);
+
+            XmlNode ArrivalTime = xDoc.CreateElement("ArrivalTime");
+            ArrivalTime.InnerText = "kingfisher";
+            Booking.AppendChild(ArrivalTime);
+
+            XmlNode BookingStatus = xDoc.CreateElement("BookingStatus");
+            BookingStatus.InnerText = "kingfisher";
+            Booking.AppendChild(BookingStatus);
+
+            xDoc.DocumentElement.AppendChild(Booking);
+
+            xDoc.Save(@"d:/Booking.xml");
+
+        }
+    }
+}

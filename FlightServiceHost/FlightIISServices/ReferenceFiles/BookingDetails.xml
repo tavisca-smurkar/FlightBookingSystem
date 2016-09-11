@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Bookings>
+  <Booking>
+    <BookingId>12</BookingId>
+    <CustomerName>Mayuresh</CustomerName>
+    <CustomerEmailId>abc@gmail.com</CustomerEmailId>
+    <MobileNumber>8459936690</MobileNumber>
+    <FlightId>LF123</FlightId>
+    <AirlineName>Kingfisher</AirlineName>
+    <Source>Pune</Source>
+    <Destination>Mumbai</Destination>
+    <Class>Business</Class>
+    <Price>15000</Price>
+    <DepartureTime>11:30</DepartureTime>
+    <ArrivalTime>12:00</ArrivalTime>
+    <BookingStatus>Cancelled</BookingStatus>
+  </Booking>
+</Bookings>
