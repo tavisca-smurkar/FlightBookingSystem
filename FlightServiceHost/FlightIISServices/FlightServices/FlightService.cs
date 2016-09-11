@@ -62,21 +62,21 @@ namespace FlightIISServices.FlightServices
             BookingId.InnerText = customer.CustomerId + "-" + flight.FlightId;
             Booking.AppendChild(BookingId);
 
-            XmlNode CustomerId = xDoc.CreateElement("CustomerId");
-            BookingId.InnerText =customer.CustomerId;
-            Booking.AppendChild(BookingId);
+            XmlNode CustomerIdForeignKey = xDoc.CreateElement("CustomerId");
+            CustomerIdForeignKey.InnerText =customer.CustomerId;
+            Booking.AppendChild(CustomerIdForeignKey);
 
-            XmlNode CustomerName = xDoc.CreateElement("CustomerName");
-            CustomerName.InnerText = customer.FisrtName+" "+customer.LastName ;
-            Booking.AppendChild(CustomerName);
+            //XmlNode CustomerName = xDoc.CreateElement("CustomerName");
+            //CustomerName.InnerText = customer.FisrtName+" "+customer.LastName ;
+            //Booking.AppendChild(CustomerName);
 
-            XmlNode EmailId = xDoc.CreateElement("EmailId");
-            EmailId.InnerText = customer.Email;
-            Booking.AppendChild(EmailId);
+            //XmlNode EmailId = xDoc.CreateElement("EmailId");
+            //EmailId.InnerText = customer.Email;
+            //Booking.AppendChild(EmailId);
 
-            XmlNode MobileNumber = xDoc.CreateElement("MobileNumber");
-            MobileNumber.InnerText = customer.MobileNumber;
-            Booking.AppendChild(MobileNumber);
+            //XmlNode MobileNumber = xDoc.CreateElement("MobileNumber");
+            //MobileNumber.InnerText = customer.MobileNumber;
+            //Booking.AppendChild(MobileNumber);
 
             XmlNode FlightId = xDoc.CreateElement("FlightId");
             FlightId.InnerText = flight.FlightId;
@@ -100,7 +100,7 @@ namespace FlightIISServices.FlightServices
 
             XmlNode Price = xDoc.CreateElement("Price");
             Price.InnerText = flight.Price.ToString();
-            Booking.AppendChild(AirlineName);
+            Booking.AppendChild(Price);
 
             XmlNode DepartureTime = xDoc.CreateElement("DepartureTime");
             DepartureTime.InnerText = flight.DepartureTime;
@@ -115,6 +115,26 @@ namespace FlightIISServices.FlightServices
             Booking.AppendChild(BookingStatus);
 
             xDoc.DocumentElement.AppendChild(Booking);
+
+            XmlNode Customer = xDoc.CreateElement("Customer");
+            xDoc.DocumentElement.AppendChild(Customer);
+
+            XmlNode CustomerId = xDoc.CreateElement("CustomerId");
+            CustomerId.InnerText = customer.CustomerId;
+            Customer.AppendChild(CustomerId);
+
+            XmlNode CustomerName = xDoc.CreateElement("CustomerName");
+            CustomerName.InnerText = customer.FisrtName + " " + customer.LastName;
+            Customer.AppendChild(CustomerName);
+
+            XmlNode EmailId = xDoc.CreateElement("EmailId");
+            EmailId.InnerText = customer.Email;
+            Customer.AppendChild(EmailId);
+
+            XmlNode MobileNumber = xDoc.CreateElement("MobileNumber");
+            MobileNumber.InnerText = customer.MobileNumber;
+            Customer.AppendChild(MobileNumber);
+            xDoc.DocumentElement.AppendChild(Customer);
 
             xDoc.Save(@"D:\FlightBookingSystem\FlightServiceHost\FlightIISServices\ReferenceFiles\BookingDetails.xml");
   

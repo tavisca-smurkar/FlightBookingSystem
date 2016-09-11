@@ -17,7 +17,7 @@ namespace FlightIISServices.FlightServices
         List<Flight> FilteringFlights(List<Flight> flightList,Filter filter);
         [OperationContract]
         void AddNewBooking(Flight flight, Customer customer);
-       // [OperationContract]
-        //void CancelBooking(string bookindId);
+        //[OperationContract]
+       // void CancelBooking(string bookindId);
     }
 }
