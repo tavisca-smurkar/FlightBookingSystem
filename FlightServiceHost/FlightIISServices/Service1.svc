@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="FlightIISServices.Service1" CodeBehind="Service1.svc.cs" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="FlightIISServices.FlightServices.FlightService" CodeBehind="Service1.svc.cs" %>
