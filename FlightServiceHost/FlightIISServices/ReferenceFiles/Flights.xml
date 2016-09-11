@@ -19,24 +19,77 @@
         <Available>2</Available>
       </FirstClass>
     </Class>
-    <DepartureTime />
-    <ArrivalTime />
-    <Rating />
+    <DepartureTime>10:20</DepartureTime>
+    <ArrivalTime>12:20</ArrivalTime>
+    <Rating>3</Rating>
   </Flight>
   <Flight>
     <Id>2</Id>
-    <AirlineName>AirIndia</AirlineName>
+    <AirlineName>JetAirways</AirlineName>
     <Source>Pune</Source>
     <Destination>Mumbai</Destination>
     <Class>
       <Economy>
-        <Price>300</Price>
-        <Available>3</Available>
+        <Price>4000</Price>
+        <Available>2</Available>
       </Economy>
       <Business>
-        <Price>6555</Price>
+        <Price>10000</Price>
         <Available>2</Available>
       </Business>
+      <FirstClass>
+        <Price>20000</Price>
+        <Available>2</Available>
+      </FirstClass>
     </Class>
+    <DepartureTime>10:20</DepartureTime>
+    <ArrivalTime>12:20</ArrivalTime>
+    <Rating>3.5</Rating>
+  </Flight>
+  <Flight>
+    <Id>3</Id>
+    <AirlineName>AirIndia</AirlineName>
+    <Source>Mumbai</Source>
+    <Destination>Pune</Destination>
+    <Class>
+      <Economy>
+        <Price>3000</Price>
+        <Available>2</Available>
+      </Economy>
+      <Business>
+        <Price>4000</Price>
+        <Available>2</Available>
+      </Business>
+      <FirstClass>
+        <Price>3000</Price>
+        <Available>2</Available>
+      </FirstClass>
+    </Class>
+    <DepartureTime>10:20</DepartureTime>
+    <ArrivalTime>12:20</ArrivalTime>
+    <Rating>4</Rating>
+  </Flight>
+  <Flight>
+    <Id>1</Id>
+    <AirlineName>JetAirways</AirlineName>
+    <Source>Pune</Source>
+    <Destination>Mumbai</Destination>
+    <Class>
+      <Economy>
+        <Price>3000</Price>
+        <Available>4</Available>
+      </Economy>
+      <Business>
+        <Price>4000</Price>
+        <Available>4</Available>
+      </Business>
+      <FirstClass>
+        <Price>3000</Price>
+        <Available>4</Available>
+      </FirstClass>
+    </Class>
+    <DepartureTime>10:20</DepartureTime>
+    <ArrivalTime>12:20</ArrivalTime>
+    <Rating>4</Rating>
   </Flight>
 </Flights>
