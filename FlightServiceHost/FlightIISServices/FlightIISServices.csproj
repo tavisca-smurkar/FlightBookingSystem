@@ -63,12 +63,17 @@
   <ItemGroup>
     <Content Include="ReferenceFiles\BookingDetails.xml" />
     <Content Include="ReferenceFiles\Customer.xml" />
-    <Content Include="ReferenceFiles\Flights.xml" />
+    <Content Include="Data\Flights.xml" />
     <Content Include="Service1.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ReferenceFiles\abc.txt" />
+    <Compile Include="Entity\Customer.cs" />
+    <Compile Include="Entity\Flight.cs" />
+    <Compile Include="Entity\Filter.cs" />
+    <Compile Include="FlightServices\FilterFlights.cs" />
+    <Compile Include="FlightServices\FlightService.cs" />
+    <Compile Include="FlightServices\IFlightService.cs" />
     <Compile Include="Service1.svc.cs">
       <DependentUpon>Service1.svc</DependentUpon>
     </Compile>
