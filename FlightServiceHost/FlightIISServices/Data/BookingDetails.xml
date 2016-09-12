@@ -19,4 +19,61 @@
     <EmailId>mb@tv.com</EmailId>
     <MobileNumber>9854659887</MobileNumber>
   </Customer>
+  <Booking>
+    <BookingId>141956383-2</BookingId>
+    <CustomerId>141956383</CustomerId>
+    <FlightId>2</FlightId>
+    <AirlineName>JetAirways</AirlineName>
+    <Source>Pune</Source>
+    <Destination>Mumbai</Destination>
+    <Class>Economy</Class>
+    <Price>4000</Price>
+    <DepartureTime>10:20</DepartureTime>
+    <ArrivalTime>12:20</ArrivalTime>
+    <BookingStatus>Booked</BookingStatus>
+  </Booking>
+  <Customer>
+    <CustomerId>141956383</CustomerId>
+    <CustomerName>Manoj Shinde</CustomerName>
+    <EmailId>abc@gmail.com</EmailId>
+    <MobileNumber>9854879865</MobileNumber>
+  </Customer>
+  <Booking>
+    <BookingId>1323152726-4</BookingId>
+    <CustomerId>1323152726</CustomerId>
+    <FlightId>4</FlightId>
+    <AirlineName>Vistara</AirlineName>
+    <Source>Pune</Source>
+    <Destination>Mumbai</Destination>
+    <Class>Economy</Class>
+    <Price>3000</Price>
+    <DepartureTime>10:20</DepartureTime>
+    <ArrivalTime>12:20</ArrivalTime>
+    <BookingStatus>Cancelled</BookingStatus>
+  </Booking>
+  <Customer>
+    <CustomerId>1323152726</CustomerId>
+    <CustomerName>Shreekesh Murkar</CustomerName>
+    <EmailId>abc@gmail.com</EmailId>
+    <MobileNumber>9821215583</MobileNumber>
+  </Customer>
+  <Booking>
+    <BookingId>1842430728-2</BookingId>
+    <CustomerId>1842430728</CustomerId>
+    <FlightId>2</FlightId>
+    <AirlineName>JetAirways</AirlineName>
+    <Source>Pune</Source>
+    <Destination>Mumbai</Destination>
+    <Class>Economy</Class>
+    <Price>4000</Price>
+    <DepartureTime>10:20</DepartureTime>
+    <ArrivalTime>12:20</ArrivalTime>
+    <BookingStatus>Cancelled</BookingStatus>
+  </Booking>
+  <Customer>
+    <CustomerId>1842430728</CustomerId>
+    <CustomerName>Salman Khan</CustomerName>
+    <EmailId>sallu@gmail.com</EmailId>
+    <MobileNumber>9821548798</MobileNumber>
+  </Customer>
 </Bookings>
