@@ -12,9 +12,12 @@ namespace FlightIISServices.FlightServices
     [ServiceBehavior(InstanceContextMode =InstanceContextMode.Single)]
     public class FlightService : IFlightService
     {
-        string FlightXMLPath = @"..\..\..\FlightIISServices\Data\Flights.xml";
-        string BookingDetailsXMLPath = @"..\..\..\FlightIISServices\Data\BookingDetails.xml";
-        string cardDetailsxmlPath= @"..\..\..\FlightIISServices\Data\Cards.xml";
+        //string FlightXMLPath = @"..\..\..\FlightIISServices\Data\Flights.xml";
+        //string BookingDetailsXMLPath = @"..\..\..\FlightIISServices\Data\BookingDetails.xml";
+        //string cardDetailsxmlPath = @"..\..\..\FlightIISServices\Data\Cards.xml";
+        string FlightXMLPath = @"D:\FlightBookingSystem\FlightServiceHost\FlightIISServices\Data\Flights.xml";
+        string BookingDetailsXMLPath = @"D:\FlightBookingSystem\FlightServiceHost\FlightIISServices\Data\BookingDetails.xml";
+        string cardDetailsxmlPath= @"D:\FlightBookingSystem\FlightServiceHost\FlightIISServices\Data\Cards.xml";
         public Result GetFlightsBySourceDestinationTravellersAndClass(string source, string destination, string traveller, string flightClass)
         {
             Result result = new Result();
@@ -26,6 +29,7 @@ namespace FlightIISServices.FlightServices
                 }
 
                 List<Flight> flightList = new List<Flight>();
+
                 XDocument doc = XDocument.Load(FlightXMLPath);
                
                 var query = from d in doc.Descendants("Flight")
@@ -75,7 +79,7 @@ namespace FlightIISServices.FlightServices
 
         
 
-        public string AddNewBooking(Flight flight, Customer customer)
+        public string AddNewBooking(Flight flight, Customer customer,int travellers)
         {
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(BookingDetailsXMLPath);
@@ -111,7 +115,7 @@ namespace FlightIISServices.FlightServices
             Booking.AppendChild(Class);
 
             XmlNode Price = xDoc.CreateElement("Price");
-            Price.InnerText = flight.Price.ToString();
+            Price.InnerText = (flight.Price* travellers).ToString();
             Booking.AppendChild(Price);
 
             XmlNode DepartureTime = xDoc.CreateElement("DepartureTime");

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="FlightService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:50436/Service1.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:50436/Service1.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:50436/Service1.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/FlightIISServices.Entity" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IFlightService_GetFlightsBySourceDestinationTravellersAndClass_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFlightsBySourceDestinationTravellersAndClass" />
+  </wsdl:message>
+  <wsdl:message name="IFlightService_GetFlightsBySourceDestinationTravellersAndClass_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFlightsBySourceDestinationTravellersAndClassResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFlightService_FilteringFlights_InputMessage">
+    <wsdl:part name="parameters" element="tns:FilteringFlights" />
+  </wsdl:message>
+  <wsdl:message name="IFlightService_FilteringFlights_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FilteringFlightsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFlightService_AddNewBooking_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddNewBooking" />
+  </wsdl:message>
+  <wsdl:message name="IFlightService_AddNewBooking_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddNewBookingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFlightService_CancelBooking_InputMessage">
+    <wsdl:part name="parameters" element="tns:CancelBooking" />
+  </wsdl:message>
+  <wsdl:message name="IFlightService_CancelBooking_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CancelBookingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFlightService_SaveCardDetails_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveCardDetails" />
+  </wsdl:message>
+  <wsdl:message name="IFlightService_SaveCardDetails_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveCardDetailsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IFlightService">
+    <wsdl:operation name="GetFlightsBySourceDestinationTravellersAndClass">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFlightService/GetFlightsBySourceDestinationTravellersAndClass" message="tns:IFlightService_GetFlightsBySourceDestinationTravellersAndClass_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFlightService/GetFlightsBySourceDestinationTravellersAndClassResponse" message="tns:IFlightService_GetFlightsBySourceDestinationTravellersAndClass_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FilteringFlights">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFlightService/FilteringFlights" message="tns:IFlightService_FilteringFlights_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFlightService/FilteringFlightsResponse" message="tns:IFlightService_FilteringFlights_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddNewBooking">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFlightService/AddNewBooking" message="tns:IFlightService_AddNewBooking_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFlightService/AddNewBookingResponse" message="tns:IFlightService_AddNewBooking_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelBooking">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFlightService/CancelBooking" message="tns:IFlightService_CancelBooking_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFlightService/CancelBookingResponse" message="tns:IFlightService_CancelBooking_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveCardDetails">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFlightService/SaveCardDetails" message="tns:IFlightService_SaveCardDetails_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFlightService/SaveCardDetailsResponse" message="tns:IFlightService_SaveCardDetails_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IFlightService" type="tns:IFlightService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetFlightsBySourceDestinationTravellersAndClass">
+      <soap:operation soapAction="http://tempuri.org/IFlightService/GetFlightsBySourceDestinationTravellersAndClass" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FilteringFlights">
+      <soap:operation soapAction="http://tempuri.org/IFlightService/FilteringFlights" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddNewBooking">
+      <soap:operation soapAction="http://tempuri.org/IFlightService/AddNewBooking" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelBooking">
+      <soap:operation soapAction="http://tempuri.org/IFlightService/CancelBooking" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveCardDetails">
+      <soap:operation soapAction="http://tempuri.org/IFlightService/SaveCardDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FlightService">
+    <wsdl:port name="BasicHttpBinding_IFlightService" binding="tns:BasicHttpBinding_IFlightService">
+      <soap:address location="http://localhost:50436/Service1.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
