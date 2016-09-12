@@ -12,19 +12,43 @@ namespace FlightIISServices.FlightServices
     [ServiceBehavior(InstanceContextMode =InstanceContextMode.Single)]
     public class FlightService : IFlightService
     {
-        
-        public List<Flight> GetFlightsBySourceDestinationTravellersAndClass(string source, string destination, int traveller, string flightClass)
+        string FlightXMLPath = @"..\..\..\FlightIISServices\Data\Flights.xml";
+        string BookingDetailsXMLPath = @"..\..\..\FlightIISServices\Data\BookingDetails.xml";
+        string cardDetailsxmlPath= @"..\..\..\FlightIISServices\Data\Cards.xml";
+        public Result GetFlightsBySourceDestinationTravellersAndClass(string source, string destination, string traveller, string flightClass)
         {
-            List<Flight> flightList = new List<Flight>();
-            XDocument doc = XDocument.Load(@"D:\FlightBookingSystem\FlightServiceHost\FlightIISServices\Data\Flights.xml");
-            Console.WriteLine(doc);
-            var query = from d in doc.Descendants("Flight")
-                        where d.Element("Source").Value.Equals(source) && d.Element("Destination").Value.Equals(destination) && Convert.ToInt32(d.Element("Class").Element(flightClass).Element("Available").Value) >= traveller
-                        select d;
+            Result result = new Result();
+            try
+            {
+               if (!FlightIISServices.Validations.Validator.ValidatePositiveNumberGreaterThanZero(traveller))
+                {
+                    throw new Exception("Enter valid number of travellers. Traveller's number should be atleast 1 and number");
+                }
 
-
-            return CreateFlightList(flightClass, flightList, query);
-
+                List<Flight> flightList = new List<Flight>();
+                XDocument doc = XDocument.Load(FlightXMLPath);
+               
+                var query = from d in doc.Descendants("Flight")
+                            where d.Element("Source").Value.Equals(source) && d.Element("Destination").Value.Equals(destination) && Convert.ToInt32(d.Element("Class").Element(flightClass).Element("Available").Value) >= Convert.ToInt32(traveller)
+                            select d;
+                if(query==null)
+                {
+                    throw new Exception("No result found.");
+                }
+                result.Status = true;
+                result.Message = "Flight List retrive successfully !";
+                result.FlightList = CreateFlightList(flightClass, flightList, query);
+                return result;
+                
+            }
+            catch (Exception ae)
+            {
+                result.Status = false;
+                result.Message = ae.Message;
+                result.FlightList = null;
+                return result;
+            }
+            
         }
 
         private static List<Flight> CreateFlightList(string flightClass, List<Flight> flightList, IEnumerable<XElement> query)
@@ -51,10 +75,10 @@ namespace FlightIISServices.FlightServices
 
         
 
-        public void AddNewBooking(Flight flight, Customer customer)
+        public string AddNewBooking(Flight flight, Customer customer)
         {
             XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(@"D:\FlightBookingSystem\FlightServiceHost\FlightIISServices\ReferenceFiles\BookingDetails.xml");
+            xDoc.Load(BookingDetailsXMLPath);
             XmlNode Booking = xDoc.CreateElement("Booking");
             xDoc.DocumentElement.AppendChild(Booking);
 
@@ -65,18 +89,6 @@ namespace FlightIISServices.FlightServices
             XmlNode CustomerIdForeignKey = xDoc.CreateElement("CustomerId");
             CustomerIdForeignKey.InnerText =customer.CustomerId;
             Booking.AppendChild(CustomerIdForeignKey);
-
-            //XmlNode CustomerName = xDoc.CreateElement("CustomerName");
-            //CustomerName.InnerText = customer.FisrtName+" "+customer.LastName ;
-            //Booking.AppendChild(CustomerName);
-
-            //XmlNode EmailId = xDoc.CreateElement("EmailId");
-            //EmailId.InnerText = customer.Email;
-            //Booking.AppendChild(EmailId);
-
-            //XmlNode MobileNumber = xDoc.CreateElement("MobileNumber");
-            //MobileNumber.InnerText = customer.MobileNumber;
-            //Booking.AppendChild(MobileNumber);
 
             XmlNode FlightId = xDoc.CreateElement("FlightId");
             FlightId.InnerText = flight.FlightId;
@@ -136,27 +148,101 @@ namespace FlightIISServices.FlightServices
             Customer.AppendChild(MobileNumber);
             xDoc.DocumentElement.AppendChild(Customer);
 
-            xDoc.Save(@"D:\FlightBookingSystem\FlightServiceHost\FlightIISServices\ReferenceFiles\BookingDetails.xml");
-  
+            xDoc.Save(BookingDetailsXMLPath);
+            return customer.CustomerId + "-" + flight.FlightId;
         }
 
-        public List<Flight> FilteringFlights(List<Flight> flightList, Filter filter)
+        public Result FilteringFlights(Result result, Filter filter)
         {
-            FilterFlights filterFlight = new FilterFlights();
-            if (filter.AirlineName != null)
+            try
             {
-                flightList = filterFlight.FilterListByAirlineName(flightList, filter.AirlineName);
+                FilterFlights filterFlight = new FilterFlights();
+                if (filter.AirlineName != null)
+                {
+                    result.FlightList = filterFlight.FilterListByAirlineName(result.FlightList, filter.AirlineName);
+                }
+                if (filter.Rating != 0)
+                {
+                    result.FlightList = filterFlight.FilterListByRating(result.FlightList, filter.Rating);
+                }
+                if (filter.StartRange != 0 && filter.EndRange != 0)
+                {
+                    result.FlightList = filterFlight.FilterListByPrice(result.FlightList, filter.StartRange, filter.EndRange);
+                }
+
+                if(result.FlightList.Count==0) throw new Exception("No result found.");
+                return result;
             }
-            if(filter.Rating != 0)
+            catch(Exception ae)
             {
-                flightList = filterFlight.FilterListByRating(flightList, filter.Rating);
+                result.Status = false;
+                result.Message = ae.Message;
+                result.FlightList = null;
+                return result;
             }
-            if(filter.StartRange!=0 && filter.EndRange != 0)
+        }
+
+        public string CancelBooking(string bookindId)
+        {
+            XDocument doc = XDocument.Load(BookingDetailsXMLPath);
+            var a = doc.Descendants("Booking").First(x=>x.Element("BookingId").Value.Equals(bookindId));
+            a.Element("BookingStatus").Value = "Cancelled";
+            doc.Save(BookingDetailsXMLPath);
+            return bookindId;
+        }
+
+        public Result SaveCardDetails(Result result, Card card)
+        {
+            try
             {
-                flightList = filterFlight.FilterListByPrice(flightList, filter.StartRange, filter.EndRange);
+                if (!Validations.Validator.ValidateCardNumber(card.CardNumber))
+                {
+                    throw new Exception("Card details is not valid. Please enter valid card number");
+                }
+                else if (!Validations.Validator.ValidateCVVNumber(card.CVV.ToString()))
+                {
+                    throw new Exception("Card CVV code is not valid. Please enter valid CVV code.");
+                }
+                else if (!Validations.Validator.ValidateName(card.CardHolderName))
+                {
+                    throw new Exception("Card holder's name is not valid. Please enter valid holder name.");
+                }
+                else
+                {
+                    XmlDocument document = new XmlDocument();
+                    document.Load(cardDetailsxmlPath);
+                    XmlNode newCard = document.CreateElement("Card");
+                    document.DocumentElement.AppendChild(newCard);
+
+                    XmlNode cardNumber = document.CreateElement("CardNumer");
+                    cardNumber.InnerText = card.CardNumber;
+                    newCard.AppendChild(cardNumber);
+
+                    XmlNode validTillMonthAndYear = document.CreateElement("ValidTillMonthAndYear");
+                    validTillMonthAndYear.InnerText = card.validTillMonthAndYear;
+                    newCard.AppendChild(validTillMonthAndYear);
+
+                    XmlNode cVV = document.CreateElement("CVV");
+                    cVV.InnerText = card.CVV.ToString();
+                    newCard.AppendChild(cVV);
+
+                    XmlNode cardHolderName = document.CreateElement("CardHolderName");
+                    cardHolderName.InnerText = card.CardHolderName;
+                    newCard.AppendChild(cardHolderName);
+                    document.Save(cardDetailsxmlPath);
+
+                    return result;
+
+                }
+              
             }
-            //throw new NotImplementedException();
-            return flightList;
+            catch (Exception ae)
+            {
+                result.Status = false;
+                result.Message = ae.Message;
+                result.FlightList = result.FlightList;
+                return result;
+            }
         }
     }
 }

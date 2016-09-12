@@ -12,12 +12,14 @@ namespace FlightIISServices.FlightServices
     public interface IFlightService
     {
         [OperationContract]
-        List<Flight> GetFlightsBySourceDestinationTravellersAndClass(string source,string destination,int traveller, string flightClass);
+        Result GetFlightsBySourceDestinationTravellersAndClass(string source,string destination, string traveller, string flightClass);
         [OperationContract]
-        List<Flight> FilteringFlights(List<Flight> flightList,Filter filter);
+        Result FilteringFlights(Result result,Filter filter);
         [OperationContract]
-        void AddNewBooking(Flight flight, Customer customer);
-        //[OperationContract]
-       // void CancelBooking(string bookindId);
+        string AddNewBooking(Flight flight, Customer customer);
+        [OperationContract]
+        string CancelBooking(string bookindId);
+        [OperationContract]
+        Result SaveCardDetails(Result result,Card card);
     }
 }
