@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Cards>
+  <Card>
+    <CardNumer>1234567891234567</CardNumer>
+    <ValidTillMonthAndYear>10/16</ValidTillMonthAndYear>
+    <CVV>420</CVV>
+    <CardHolderName>Mayuresh Bhanushali</CardHolderName>
+  </Card>
+</Cards>
