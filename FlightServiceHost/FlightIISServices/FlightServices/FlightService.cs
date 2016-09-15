@@ -12,13 +12,11 @@ namespace FlightIISServices.FlightServices
     [ServiceBehavior(InstanceContextMode =InstanceContextMode.Single)]
     public class FlightService : IFlightService
     {
-        //string s= HttpContext.Current.Server.MapPath(@"/Data/Flights.xml");
-        string FlightXMLPath = HttpContext.Current.Server.MapPath(@"/Data/Flights.xml")           
+
+        string FlightXMLPath = HttpContext.Current.Server.MapPath(@"/Data/Flights.xml");          
         string BookingDetailsXMLPath = HttpContext.Current.Server.MapPath(@"\Data\BookingDetails.xml");
         string cardDetailsxmlPath = HttpContext.Current.Server.MapPath(@"\Data\Cards.xml");
-       // string FlightXMLPath = @"D:\FlightBookingSystem\FlightServiceHost\FlightIISServices\Data\Flights.xml";
-        //string BookingDetailsXMLPath = @"D:\FlightBookingSystem\FlightServiceHost\FlightIISServices\Data\BookingDetails.xml";
-        //string cardDetailsxmlPath= @"D:\FlightBookingSystem\FlightServiceHost\FlightIISServices\Data\Cards.xml";
+       
         public Result GetFlightsBySourceDestinationTravellersAndClass(string source, string destination, string traveller, string flightClass)
         {
             Result result = new Result();
