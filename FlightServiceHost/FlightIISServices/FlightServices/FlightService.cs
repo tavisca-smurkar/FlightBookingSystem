@@ -12,12 +12,13 @@ namespace FlightIISServices.FlightServices
     [ServiceBehavior(InstanceContextMode =InstanceContextMode.Single)]
     public class FlightService : IFlightService
     {
-        //string FlightXMLPath = @"..\..\..\FlightIISServices\Data\Flights.xml";
-        //string BookingDetailsXMLPath = @"..\..\..\FlightIISServices\Data\BookingDetails.xml";
-        //string cardDetailsxmlPath = @"..\..\..\FlightIISServices\Data\Cards.xml";
-        string FlightXMLPath = @"D:\FlightBookingSystem\FlightServiceHost\FlightIISServices\Data\Flights.xml";
-        string BookingDetailsXMLPath = @"D:\FlightBookingSystem\FlightServiceHost\FlightIISServices\Data\BookingDetails.xml";
-        string cardDetailsxmlPath= @"D:\FlightBookingSystem\FlightServiceHost\FlightIISServices\Data\Cards.xml";
+        //string s= HttpContext.Current.Server.MapPath(@"/Data/Flights.xml");
+        string FlightXMLPath = HttpContext.Current.Server.MapPath(@"/Data/Flights.xml")           
+        string BookingDetailsXMLPath = HttpContext.Current.Server.MapPath(@"\Data\BookingDetails.xml");
+        string cardDetailsxmlPath = HttpContext.Current.Server.MapPath(@"\Data\Cards.xml");
+       // string FlightXMLPath = @"D:\FlightBookingSystem\FlightServiceHost\FlightIISServices\Data\Flights.xml";
+        //string BookingDetailsXMLPath = @"D:\FlightBookingSystem\FlightServiceHost\FlightIISServices\Data\BookingDetails.xml";
+        //string cardDetailsxmlPath= @"D:\FlightBookingSystem\FlightServiceHost\FlightIISServices\Data\Cards.xml";
         public Result GetFlightsBySourceDestinationTravellersAndClass(string source, string destination, string traveller, string flightClass)
         {
             Result result = new Result();
@@ -25,7 +26,7 @@ namespace FlightIISServices.FlightServices
             {
                if (!FlightIISServices.Validations.Validator.ValidatePositiveNumberGreaterThanZero(traveller))
                 {
-                    throw new Exception("Enter valid number of travellers. Traveller's number should be atleast 1 and number");
+                    throw new Exception("Enter valid number of travellers.Travellers number should be atleast 1");
                 }
 
                 List<Flight> flightList = new List<Flight>();
@@ -40,7 +41,7 @@ namespace FlightIISServices.FlightServices
                     throw new Exception("No result found.");
                 }
                 result.Status = true;
-                result.Message = "Flight List retrive successfully !";
+                result.Message = "Flight List retrieve successfully !";
                 result.FlightList = CreateFlightList(flightClass, flightList, query);
                 return result;
                 
